@@ -29,56 +29,48 @@ class AttestationController extends Controller
 
     public function store(Request $request) {
 
-        try {
-            
            /** @var string $fantasy_name */
-            /** @var string $fantasy_name */
+            /** @var string $integration */
             extract($request->all());
             
-            $attestation = new Attestation();
+            $attestation = new Attestation();;
+
+            $attestation->integration = $request->integration;
+            $attestation->fantasy_name = $request->fantasy_name;
             $attestation->contract_id = $request->contract_id;
-            $integration->fantasy_name = $request->fantasy_name;
-            $integration->integration = $request->integration;
             
 
-            \DB::transaction(function () use ($integration) {
+            \DB::transaction(function () use ($attestation) {
 
-                $integration->save();
+                $attestation->save();
             });
 
-            return redirect()->route("contract.show", $integration->id)
+            return redirect()->route("contract.show", $attestation->id)
                 ->withFlashSuccess("criado com Sucesso");
-
-        } catch (\Throwable $exception) {
-            return redirect_back_with($exception);
-        }
     }
 
     public function update(Request $request, $id)
     {
-        try {
+       
             
             /** @var string $fantasy_name */
-            /** @var string $fantasy_name */
+            /** @var string $integration */
             extract($request->all());
             
-            $attestation = new Attestation();
+            $attestation =Attestation::findOrFail($id);;
             $attestation->contract_id = $request->contract_id;
-            $integration->fantasy_name = $request->fantasy_name;
-            $integration->integration = $request->integration;
+            $attestation->fantasy_name = $fantasy_name;
+            $attestation->integration = $request->integration;
             
 
-            \DB::transaction(function () use ($integration) {
+            \DB::transaction(function () use ($attestation) {
 
-                $integration->save();
+                $attestation->save();
             });
 
-            return redirect()->route("contract.show", $integration->id)
+            return redirect()->route("contract.show", $attestation->id)
                 ->withFlashSuccess("criado com Sucesso");
 
-        } catch (\Throwable $exception) {
-            return redirect_back_with($exception);
-        }
 
     }
 

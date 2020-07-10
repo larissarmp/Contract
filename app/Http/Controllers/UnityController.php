@@ -71,7 +71,7 @@ class UnityController extends Controller
             /** @var string $email */
             extract($request->all());
             
-            $unity = new Unity();
+            $unity = Unity::findOrFail($id);;
             $unity->integration = $request->integration;
             $unity->fantasy_name = $request->fantasy_name;
             $unity->city = $request->city;

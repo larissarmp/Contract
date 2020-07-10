@@ -14,28 +14,23 @@ class ContractController extends Controller
 {
     public function index()
     {
-        $contract = Contract::query()->get();
+        $contract = Contract::with(['client','unity','attestation'])->get();
         // dd($contract);
         return view('contract', compact('contract'));
     }
     
     public function show($Id) {
-        try {
+        
             $contract = Contract::findOrFail($Id);
             
             $client = Client::query()->get();
-
+           
             $attestation = Attestation::query()->get();
 
             $unity = Unity::query()->get();
 
             return view('contract_single', compact('contract', 'client', 'attestation', 'unity'));
-        } catch (ModelNotFoundException $e) {
-
-            return redirect()
-                ->route("contract.index")
-                ->withErrors("não encontrado.");
-        }
+       
     }
 
     public function store(Request $request) {
@@ -70,7 +65,7 @@ class ContractController extends Controller
 
     public function update(Request $request, $id)
     {
-        try {
+       
             
             /** @var string $cnpj */
             /** @var string $fantasy_name */
@@ -78,7 +73,7 @@ class ContractController extends Controller
             /** @var string $email */
             extract($request->all());
             
-            $contract = new Contract();
+            $contract = Contract::findOrFail($id);;
             $contract->cnpj = $cnpj;
             $contract->fantasy_name = $fantasy_name;
             $contract->social_season = $social_season;
@@ -97,15 +92,11 @@ class ContractController extends Controller
             return redirect()->route("contract.show", $contract->id)
                 ->withFlashSuccess("criado com Sucesso");
 
-        } catch (\Throwable $exception) {
-            return redirect_back_with($exception);
-        }
-
     }
 
     public function destroy($id)
     {
-        try {
+    
 
             /** @var Contract $contract */
             $contract = Contract::findOrFail($id);
@@ -113,10 +104,6 @@ class ContractController extends Controller
 
             return redirect()->route("contract.index")
                 ->withFlashSuccess("deletado com sucesso.");
-        } catch (ModelNotFoundException $e) {
-            return redirect()
-                ->route("contract.index")
-                ->withErrors("não encontrado.");
-        }
+      
     }
 }

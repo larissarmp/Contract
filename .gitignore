@@ -9,3 +9,5 @@
 /tests
 /vendor
 /webpack.mix.js
+artisan
+argon/

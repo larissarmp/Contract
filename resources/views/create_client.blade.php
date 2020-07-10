@@ -10,8 +10,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-4">
+                            <label>ID Contrato</label>
+                            <input type="text" name="contract_id" class="form-control" value = "{{$contract->id}}" >
+                        </div>
+                        <div class="form-group col-md-4">
                             <label>Nome fantasia</label>
-                            <input type="text" name="	fantasy_name" class="form-control" value = ""required>
+                        <input type="text" name="fantasy_name" class="form-control" value = "{{$contract->fantasy_name}}">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Cpf</label>

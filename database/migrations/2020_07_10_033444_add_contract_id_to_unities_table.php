@@ -15,9 +15,7 @@ class AddContractIdToUnitiesTable extends Migration
     {
         Schema::table('unities', function (Blueprint $table) {
 
-            $table->unsignedInteger('contract_id')->after('id');
-
-            $table->foreign('contract_id')->references('id')->on('contracts'); 
+            // $table->foreign('contract_id')->references('id')->on('contracts'); 
             
         });
     }
@@ -30,7 +28,7 @@ class AddContractIdToUnitiesTable extends Migration
     public function down()
     {
         Schema::table('unities', function (Blueprint $table) {
-            $table->dropColumn(['contract_id']);
+            // $table->dropColumn(['contract_id']);
         });
     }
 }

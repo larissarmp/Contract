@@ -14,9 +14,8 @@ class AddContractIdToClientsTable extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            
-            $table->unsignedInteger('contract_id')->unsigned()->after('id');
-            $table->foreign('contract_id')->references('id')->on('contracts'); 
+
+            // $table->foreign('contract_id')->references('id')->on('contracts'); 
         });
     }
 
@@ -28,7 +27,7 @@ class AddContractIdToClientsTable extends Migration
     public function down()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->dropColumn(['contract_id']);
+            // $table->dropColumn(['contract_id']);
         });
 
         

@@ -31,7 +31,7 @@ class ClientController extends Controller
 
     public function store(Request $request) {
 
-        try {
+       
             
             /** @var string $cpf */
             /** @var string $fantasy_name */
@@ -39,6 +39,7 @@ class ClientController extends Controller
             extract($request->all());
             
             $client = new Client();
+            $client->contract_id = $request->contract_id;
             $client->cpf = $request->cpf;
             $client->fantasy_name = $request->fantasy_name;
             $client->name = $request->name;
@@ -52,9 +53,7 @@ class ClientController extends Controller
             return redirect()->route("contract.show", $client->id)
                 ->withFlashSuccess("criado com Sucesso");
 
-        } catch (\Throwable $exception) {
-            return redirect_back_with($exception);
-        }
+       
     }
 
     public function update(Request $request, $id)
@@ -66,14 +65,14 @@ class ClientController extends Controller
             /** @var string $name */
             extract($request->all());
             
-            $client = new Client();
+            $client = Client::findOrFail($id);
+            $client->contract_id = $request->contract_id;
             $client->cpf = $request->cpf;
             $client->fantasy_name = $request->fantasy_name;
             $client->name = $request->name;
             
 
             \DB::transaction(function () use ($client) {
-
                 $client->save();
             });
 

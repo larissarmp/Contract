@@ -15,14 +15,14 @@ class CreateAttestationsTable extends Migration
     {
         Schema::create('attestations', function (Blueprint $table) {
             $table->Increments('id');
-            // $table->string('contract_id');
+            $table->bigInteger('contract_id')->unsigned();
             $table->string('fantasy_name');
             $table->string('integration');
             $table->timestamps();
             $table->softDeletes();
 
-            // $table->foreign('contract_id')
-            //     ->references('id')->on('contracts');
+            $table->foreign('contract_id')
+                ->references('id')->on('contracts');
         });
     }
 
