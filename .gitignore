@@ -1,0 +1,11 @@
+/.env.example
+/composer.json
+/composer.lock
+/node_modules
+/package-lock.json
+/package.json
+/phpunit.xml
+/storage
+/tests
+/vendor
+/webpack.mix.js
