@@ -96,8 +96,6 @@ class ContractController extends Controller
 
     public function destroy($id)
     {
-    
-
             /** @var Contract $contract */
             $contract = Contract::findOrFail($id);
             $contract->delete();

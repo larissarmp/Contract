@@ -108,7 +108,7 @@
 
             <div class="form-group col-md-4">
                 <label>Cidade</label>
-                <textarea type="text" name="city" class="form-control" value="" required></textarea>
+                <input type="text" name="city" class="form-control" value="" required>
             </div>
 
             {{-- <div class="form-group col-md-12">
